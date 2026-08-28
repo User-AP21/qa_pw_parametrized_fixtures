@@ -11,9 +11,9 @@ const testParameters = [
 
 testParameters.forEach(({ tagsNumber, testNameEnding }) => {
   test.describe('Add tags to the article', () => {
-    test.beforeEach(async ({ page, user, articleWithoutTags }) => {
+    test.beforeEach(async ({ page, user, articleWithOneTag }) => {
       await signUpUser(page, user);
-      await createArticle(page, articleWithoutTags);
+      await createArticle(page, articleWithOneTag);
     });
 
     test(`Add ${testNameEnding} to the article`, async ({

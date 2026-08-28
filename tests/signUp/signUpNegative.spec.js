@@ -7,7 +7,7 @@ import {
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 
 const user = generateNewUserData();
-const testParametes = [
+const testParameters = [
   {
     email: user.email,
     username: '',
@@ -31,7 +31,7 @@ const testParametes = [
   },
 ];
 
-testParametes.forEach(({ email, username, password, message, title }) => {
+testParameters.forEach(({ email, username, password, message, title }) => {
   test.describe('Sign up negative tests', () => {
     test(`Sign up with ${title}`, async ({ user, signUpPage }) => {
       await signUpPage.open();
