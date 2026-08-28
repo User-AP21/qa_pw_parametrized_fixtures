@@ -2,17 +2,19 @@ import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 
-export const test = base.extend<{
-  usersNumber;
-  contextsNumber;
-  pages;
-  user;
-  users;
-  infoTestLog;
-},
-{
-  logger;
-}>({
+export const test = base.extend<
+  {
+    usersNumber;
+    contextsNumber;
+    pages;
+    user;
+    users;
+    infoTestLog;
+  },
+  {
+    logger;
+  }
+>({
   usersNumber: [1, { option: true }],
   contextsNumber: [1, { option: true }],
   pages: async ({ browser, contextsNumber }, use) => {

@@ -1,0 +1,35 @@
+import { test } from '../../_fixtures/fixtures';
+import { generateNewArticleData } from '../../../src/common/testData/generateNewArticleData';
+import { signUpUser } from '../../../src/ui/actions/auth/signUpUser';
+import { createArticle } from '../../../src/ui/actions/articles/createArticle';
+
+const testParameters = [
+  { tagsNumber: 1, testNameEnding: 'one tag' },
+  { tagsNumber: 2, testNameEnding: 'two tags' },
+  { tagsNumber: 5, testNameEnding: 'five tags' },
+];
+
+testParameters.forEach(({ tagsNumber, testNameEnding }) => {
+  test.describe('Add tags to the article', () => {
+    test.beforeEach(async ({ page, user, articleWithoutTags }) => {
+      await signUpUser(page, user);
+      await createArticle(page, articleWithoutTags);
+    });
+
+    test(`Add ${testNameEnding} to the article`, async ({
+      page,
+      editArticlePage,
+      viewArticlePage,
+      logger,
+    }) => {
+      const article = generateNewArticleData(logger, tagsNumber);
+
+      await viewArticlePage.clickEditArticleButton();
+      await editArticlePage.removeAllTags();
+      await editArticlePage.clickUpdateButton();
+      await page.reload();
+      await page.waitForTimeout(5000);
+      await viewArticlePage.assertTagIsRemoved(article.tags);
+    });
+  });
+});

@@ -19,7 +19,10 @@
     "prettier": "^3.4.2"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "npx playwright test",
+    "test--headed": "npx playwright test --ui",
+    "test--debug": "playwright test --debug"
   },
   "husky": {
     "hooks": {
