@@ -9,7 +9,7 @@ const testParameters = [
 ];
 
 testParameters.forEach(({ tagsNumber, testNameEnding }) => {
-  test.describe('Create and article with tags', () => {
+  test.describe('Create an article with tags', () => {
     test.beforeEach(async ({ page, user }) => {
       await signUpUser(page, user);
     });

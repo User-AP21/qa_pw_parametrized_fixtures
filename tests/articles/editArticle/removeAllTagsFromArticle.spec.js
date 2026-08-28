@@ -9,20 +9,21 @@ const testParameters = [
   { tagsNumber: 5, testNameEnding: 'five tags' },
 ];
 
+let article;
+
 testParameters.forEach(({ tagsNumber, testNameEnding }) => {
-  test.describe('Add tags to the article', () => {
-    test.beforeEach(async ({ page, user, articleWithOneTag }) => {
+  test.describe('Remove tags from the article', () => {
+    test.beforeEach(async ({ page, user, logger }) => {
+      article = generateNewArticleData(logger, tagsNumber);
       await signUpUser(page, user);
-      await createArticle(page, articleWithOneTag);
+      await createArticle(page, article);
     });
 
-    test(`Add ${testNameEnding} to the article`, async ({
+    test(`Remove ${testNameEnding} from the article`, async ({
       page,
       editArticlePage,
-      viewArticlePage,
-      logger,
+      viewArticlePage
     }) => {
-      const article = generateNewArticleData(logger, tagsNumber);
 
       await viewArticlePage.clickEditArticleButton();
       await editArticlePage.removeAllTags();

@@ -37,7 +37,6 @@ test('View an article created by another user', async ({
 });
 
 test('User can see articles from two followed users in Your Feed', async ({
-  articleWithoutTags,
   pages,
   users,
 }) => {
